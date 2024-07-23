@@ -109,24 +109,29 @@ Task5(rejPromise);
 // Task 6:
 
 const Task6 = async () => {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1'; // Example public API
-    try {
-        const res = await fetch(apiUrl);
-        if (!res.ok) {
-            throw new Error("Error in response");
-        }
-        const data = await res.json();
-        console.log(data);
-    } catch (err) {
-        console.error("Error while fetching data:", err);
-    }
+    const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1';
+
+    fetch(apiUrl)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Error in response');
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.error('Error while fetching data:', err);
+        });
+
 };
 Task6();
 
 // Task 7:
 
 const Task7 = async () => {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1'; // Example public API
+    const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1';
     try {
         const res = await fetch(apiUrl);
         if (!res.ok) {
@@ -145,33 +150,33 @@ Task7();
 // Task 8:
 
 const Task8 = async () => {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1'; // Example public API
-    try {
-        const res = await fetch(apiUrl);
-        if (!res.ok) {
-            throw new Error("Error in response");
-        }
-        const data = await res.json();
-        console.log(data);
-    } catch (err) {
-        console.error("Error while fetching data:", err);
-    }
+    const promise1 = fetch('https://jsonplaceholder.typicode.com/posts/1').then(response => response.json());
+    const promise2 = fetch('https://jsonplaceholder.typicode.com/posts/2').then(response => response.json());
+    const promise3 = fetch('https://jsonplaceholder.typicode.com/posts/3').then(response => response.json());
+
+    Promise.all([promise1, promise2, promise3])
+        .then(results => {
+            console.log('All results:', results);
+        })
+        .catch(error => {
+            console.error('Error while fetching data:', error);
+        });
 };
 Task8();
 
 // Task 9:
 
 const Task9 = async () => {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1'; // Example public API
-    try {
-        const res = await fetch(apiUrl);
-        if (!res.ok) {
-            throw new Error("Error in response");
-        }
-        const data = await res.json();
-        console.log(data);
-    } catch (err) {
-        console.error("Error while fetching data:", err);
-    }
+    const promise1 = new Promise((resolve, reject) => setTimeout(() => resolve('Result from promise 1'), 3000));
+    const promise2 = new Promise((resolve, reject) => setTimeout(() => resolve('Result from promise 2'), 1000));
+    const promise3 = new Promise((resolve, reject) => setTimeout(() => resolve('Result from promise 3'), 2000));
+
+    Promise.race([promise1, promise2, promise3])
+        .then(result => {
+            console.log('First resolved result:', result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 };
 Task9();
