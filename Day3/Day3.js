@@ -21,19 +21,17 @@ console.log(Task2(0));
 
 // Task 3:
 
-// const Task3 = (a, b, c) => {
-//     if(a>b){
-//         if(a>c) return a;
-//     }
-//     else if(b>a){
-//         if(b>c)return b;
-//     }
-//     else if(c>a){
-//         if(c>b)return c;
-//     }
+const Task3 = (a, b, c) => {
+    if (a >= b && a >= c) {
+        return a;
+    } else if (b >= a && b >= c) {
+        return b;
+    } else {
+        return c;
+    }
+}
 
-// }
-// console.log(Task3(0, 1, 2));
+console.log(Task3(0, 1, 2));
 
 // Activity 3: Switch Case
 
